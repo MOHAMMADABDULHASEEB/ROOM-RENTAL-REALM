@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Details - Room Rental Realm</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Room Rental Realm</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="welcomeMessage">Welcome</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutButton">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Available Houses</h2>
+        <div id="housesList" class="row">
+            <!-- Houses will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        window.onload = async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const response = await fetch('http://localhost:3000/api/houses', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                const housesList = document.getElementById('housesList');
+                data.houses.forEach(house => {
+                    const houseCard = `
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">${house.location}</h5>
+                                    <p class="card-text">Type: ${house.type}</p>
+                                    <p class="card-text">Rent: ₹${house.rent}</p>
+                                    <p class="card-text">${house.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    housesList.innerHTML += houseCard;
+                });
+            } else {
+                alert(data.error);
+            }
+        };
+    </script>
+</body>
+</html>
