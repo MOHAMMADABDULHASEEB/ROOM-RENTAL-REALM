@@ -19,10 +19,15 @@ Room Rental Realm is an innovative web-based platform designed to simplify the p
 # 🛠 Tech Stack
 
 Frontend: HTML, CSS, JavaScript
+
 Backend: Node.js, Express.js
+
 Database: MySQL
+
 Authentication: JSON Web Tokens (JWT)
+
 Version Control: Git & GitHub
+
 
 # 📂 Project Structure
 
