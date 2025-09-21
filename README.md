@@ -80,6 +80,6 @@ V. Shashank
 
 Guided by Dr. Raghwendra Kishore Singh (Assistant Professor, School of CS&AI, SR University)
 
-#📜 License
+# 📜 License
 
 This project is developed as part of a B.Tech Capstone Project under SR University. You are free to use, learn, and improve upon it with proper attribution.
